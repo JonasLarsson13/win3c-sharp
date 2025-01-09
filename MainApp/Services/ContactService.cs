@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Text.Json;
 using MainApp.Models;
+using MainApp.Utilities;
 
 namespace MainApp.Services;
 
@@ -16,7 +17,7 @@ public class ContactService
 
     public void CreateContact(Contact model)
     {
-        model.Id = Guid.NewGuid();
+        model.Id = IdGenerator.Generate();
         model.CreatedDate = DateTime.Now;
         _contactsList.Add(model);
 
