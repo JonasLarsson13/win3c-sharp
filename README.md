@@ -7,3 +7,4 @@ A simple contact list application built with C# and .NET.
 - List all contacts.
 - Save contacts to a JSON file.
 - Load contacts from a JSON file.
+- Testing features
