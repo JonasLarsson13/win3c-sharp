@@ -1,10 +1,16 @@
+using System.Text.RegularExpressions;
+
 namespace MainApp.Utilities;
 
 public static class Validator
 {
     public static bool IsValidPhone(string phone)
     {
-        return phone.All(char.IsDigit) || phone.StartsWith("+") || phone.Contains('-');
+        if (string.IsNullOrWhiteSpace(phone))
+            return false;
+
+        var phoneRegex = new Regex(@"^\+?[0-9]+(-[0-9]+)*$");
+        return phoneRegex.IsMatch(phone);
     }
 
     public static bool IsValidZipCode(string zipCode)
@@ -14,15 +20,10 @@ public static class Validator
 
     public static bool IsValidEmail(string email)
     {
-        /* Detta är genererat av Chat GPT 4o - Denna kod kollar om det är en valid epost */
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
+        if (string.IsNullOrWhiteSpace(email))
             return false;
-        }
+        
+        var emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+        return emailRegex.IsMatch(email);
     }
 }
